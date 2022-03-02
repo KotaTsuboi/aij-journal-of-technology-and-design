@@ -1,0 +1,302 @@
+% ページ設定
+\usepackage[
+    paperwidth=210truemm,
+    paperheight=297truemm,
+    top=20truemm,
+    bottom=30truemm,
+    left=15truemm,
+    right=15truemm
+]{geometry}
+
+% 段間設定
+\setlength{\columnsep}{2zw}
+
+% 行間設定
+\setlength{\baselineskip}{8truept}
+
+% ヘッダとフッタの設定
+\pagestyle{empty}
+
+% 罫線の太さを変更
+\def\hrulefill{\leavevmode\leaders\hrule height 1.5truept\hfill\kern\z@}
+
+% 章最初の段落も字下げ
+\usepackage{indentfirst}
+
+% 表にtoprule、midrule、bottomruleを使用
+\usepackage{booktabs}
+\setlength{\arrayrulewidth}{1.5truept}
+
+% 参考文献のURLのアンダーバーを正しく出力する
+\usepackage[colorlinks=true,citecolor=black,filecolor=black,linkcolor=black,urlcolor=black]{hyperref}
+
+% 日本語のしおりを使用
+\usepackage{pxjahyper}
+
+% ページ上下の図と図の間の余白
+\setlength\floatsep{8truept}
+
+% ページ上下の図と本文の間の余白
+\setlength\textfloatsep{8truept}
+
+% ページ途中の図と本文の間の余白
+\setlength\intextsep{8truept}
+
+% キャプション上の余白
+\setlength\abovecaptionskip{0pt}
+
+% キャプション下の余白
+\setlength\belowcaptionskip{0pt}
+
+\makeatletter
+% section書式
+\def\section{\@startsection {section}{1}{\z@}{-9truept plus -1ex minus -.2ex}{0pt plus .2ex}{\normalsize\sffamily}}
+% subsection書式
+\def\subsection{\@startsection {subsection}{1}{\z@}{-0pt plus -1ex minus -.2ex}{0pt plus .2ex}{\normalsize\sffamily}}
+\makeatother
+
+% 引用番号の書式
+\usepackage[backend=biber]{biblatex}
+%\DeclareFieldFormat{labelnumberwidth}{\mkbibparens{#1}}
+%\DeclareFieldFormat{shorthandwidth}{\mkbibparens{#1}}
+\makeatletter
+\def\@citess#1{\textsuperscript{#1)}}
+\renewcommand{\@biblabel}[1]{#1)}
+\makeatother
+
+\renewcommand*{\bibfont}{\small}
+
+% MSフォントを使用
+% otfパッケージを使用する場合は
+% ptex-ms.map -> otf-ms.map
+% と変更する必要がある
+\AtBeginDvi{\special{pdf:mapfile ptex-ms.map}}
+
+\makeatletter
+\def\title#1#2{
+    \gdef\@jatitle{#1}
+    \gdef\@entitle{#2}
+}
+
+\def\authorA#1#2#3{
+    \gdef\@jaauthorA{#1}
+    \gdef\@enauthorA{#2}
+    \gdef\@instituteNumberA{#3}
+}
+\def\authorB#1#2#3{
+    \gdef\@jaauthorB{#1}
+    \gdef\@enauthorB{#2}
+    \gdef\@instituteNumberB{#3}
+}
+\def\authorC#1#2#3{
+    \gdef\@jaauthorC{#1}
+    \gdef\@enauthorC{#2}
+    \gdef\@instituteNumberC{#3}
+}
+\def\authorD#1#2#3{
+    \gdef\@jaauthorD{#1}
+    \gdef\@enauthorD{#2}
+    \gdef\@instituteNumberD{#3}
+}
+
+\def\instituteA#1#2{
+    \gdef\@jainstituteA{#1}
+    \gdef\@eninstituteA{#2}
+}
+\def\instituteB#1#2{
+    \gdef\@jainstituteB{#1}
+    \gdef\@eninstituteB{#2}
+}
+\def\instituteC#1#2{
+    \gdef\@jainstituteC{#1}
+    \gdef\@eninstituteC{#2}
+}
+\def\instituteD#1#2{
+    \gdef\@jainstituteD{#1}
+    \gdef\@eninstituteD{#2}
+}
+
+\def\address#1{
+    \gdef\@address{#1}
+}
+
+\def\keywords#1#2{
+    \gdef\@jakeywords{#1}
+    \gdef\@enkeywords{#2}
+}
+
+\def\abstract#1{
+    \gdef\@abstract{#1}
+}
+
+\usepackage{multicol}
+\usepackage{tgheros}
+\usepackage{setspace}
+
+\renewcommand{\@maketitle}{
+    \hrulefill
+    \begin{multicols}{2}
+    {
+        \sffamily\fontsize{18truept}{0pt}\selectfont
+        \@jatitle
+    }
+    \newpage
+    {
+        \sffamily\fontsize{14truept}{0pt}\selectfont
+        \@entitle
+    }
+    \end{multicols}
+    \hrulefill
+    \begin{spacing}{0.5}
+    \begin{multicols}{2}
+        {
+            \sffamily\fontsize{8truept}{8truept}\selectfont
+            \setlength{\tabcolsep}{0mm}
+            \begin{tabular}{ll}
+                \ifdefined\@jaauthorA
+                    \@jaauthorA
+                    \ifdefined\@instituteNumberA
+                        \,\rule[.3zw]{3zw}{0.2truept}
+                        ＊\@instituteNumberA
+                    \fi
+                    \hspace{3zw}
+                    &
+                \fi
+                \ifdefined\@jaauthorB
+                    \@jaauthorB
+                    \ifdefined\@instituteNumberB
+                        \,\rule[.3zw]{3zw}{0.2truept}
+                        ＊\@instituteNumberB
+                    \fi
+                    \\
+                \fi
+                \ifdefined\@jaauthorC
+                    \@jaauthorC
+                    \ifdefined\@instituteNumberC
+                        \,\rule[.3zw]{3zw}{0.2truept}
+                        ＊\@instituteNumberC
+                    \fi
+                    \hspace{3zw}
+                    &
+                \fi
+                \ifdefined\@jaauthorD
+                    \@jaauthorD
+                    \ifdefined\@instituteNumberD
+                        \,\rule[.3zw]{3zw}{0.2truept}
+                        ＊\@instituteNumberD
+                    \fi
+                \fi
+            \end{tabular}
+        }
+
+        \newpage
+
+        {
+            \sffamily\bfseries\fontsize{8truept}{8truept}\selectfont
+            \setlength{\tabcolsep}{0mm}
+            \begin{tabular}{ll}
+            \ifdefined\@enauthorA
+                \@enauthorA
+                \ifdefined\@instituteNumberA
+                    \,\rule[.3zw]{3zw}{0.2truept}
+                    ＊\@instituteNumberA
+                \fi
+                \hspace{2zw}
+                &
+            \fi
+            \ifdefined\@enauthorB
+                \@enauthorB
+                \ifdefined\@instituteNumberB
+                    \,\rule[.3zw]{3zw}{0.2truept}
+                    ＊\@instituteNumberB
+                \fi
+                \\
+            \fi
+            \ifdefined\@enauthorC
+                \@enauthorC
+                \ifdefined\@instituteNumberC
+                    \,\rule[.3zw]{3zw}{0.2truept}
+                    ＊\@instituteNumberC
+                \fi
+                \hspace{2zw}
+                &
+            \fi
+            \ifdefined\@enauthorD
+                \@enauthorD
+                \ifdefined\@instituteNumberD
+                    \,\rule[.3zw]{3zw}{0.2truept}
+                    ＊\@instituteNumberD
+                \fi
+            \fi
+            \end{tabular}
+        }
+    \end{multicols}
+    \begin{multicols}{2}
+        {
+            \sffamily\fontsize{8truept}{8truept}\selectfont
+            キーワード：
+
+            \ifdefined\@jakeywords
+                \@jakeywords
+            \fi
+
+            \vskip\baselineskip
+
+            Keywords:
+
+            \ifdefined\@enkeywords
+                \@enkeywords
+            \fi
+        }
+        \newpage
+        {
+            \fontsize{8truept}{8truept}\selectfont
+            \ifdefined\@abstract
+                \@abstract
+            \fi
+        }
+    \end{multicols}
+    \end{spacing}
+    \hrulefill
+}
+
+\def\makefooter{
+    {
+        \setlength{\tabcolsep}{0mm}
+        \begin{table}[b]
+            \fontsize{8truept}{8truept}\selectfont
+            \begin{tabular}{p{\linewidth}p{\linewidth}}
+                \hline
+                \ifdefined\@jainstituteA
+                \begin{tabular}{l}
+                    ${}^{\ast1}$ \ \@jainstituteA \\
+                    \hspace{2zw}（\@address）
+                \end{tabular}
+                &
+                \fi
+                \ifdefined\@eninstituteA
+                    ${}^{\ast1}$ \ \@eninstituteA \\
+                \fi
+                \ifdefined\@jainstituteB
+                    ${}^{\ast2}$ \ \@jainstituteB &
+                \fi
+                \ifdefined\@eninstituteB
+                    ${}^{\ast2}$ \ \@eninstituteB \\
+                \fi
+                \ifdefined\@jainstituteC
+                    ${}^{\ast3}$ \ \@jainstituteC &
+                \fi
+                \ifdefined\@eninstituteC
+                    ${}^{\ast3}$ \ \@eninstituteC \\
+                \fi
+                \ifdefined\@jainstituteD
+                    ${}^{\ast4}$ \ \@jainstituteD &
+                \fi
+                \ifdefined\@eninstituteD
+                    ${}^{\ast4}$ \ \@eninstituteD
+                \fi
+            \end{tabular}
+        \end{table}
+    }
+}
+\makeatother
